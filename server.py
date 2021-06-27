@@ -1,5 +1,6 @@
 import os
 import random
+import snakeUtils as utils
 
 import cherrypy
 
@@ -42,6 +43,8 @@ class Battlesnake(object):
         # Valid moves are "up", "down", "left", or "right".
         # TODO: Use the information in cherrypy.request.json to decide your next move.
         data = cherrypy.request.json
+        snakeUtils = utils.SnakeUtils(data)
+        snakeUtils.determine_state()
 
         # Choose a random direction to move in
         possible_moves = ["up", "down", "left", "right"]
@@ -59,7 +62,6 @@ class Battlesnake(object):
 
         print("END")
         return "ok"
-
 
 if __name__ == "__main__":
     server = Battlesnake()
